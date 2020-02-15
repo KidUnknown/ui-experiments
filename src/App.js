@@ -14,20 +14,24 @@ function App({ ...props }) {
     title="Messing with React",
     imageUrl = [
       "https://wallpaperaccess.com/full/187163.jpg",
-      "https://cdn.pixabay.com/photo/2016/04/15/04/02/water-1330252__340.jpg"
+      "https://cdn.pixabay.com/photo/2016/04/15/04/02/water-1330252__340.jpg",
+      "https://webneel.com/wallpaper/sites/default/files/images/08-2018/3-nature-wallpaper-mountain.jpg"
     ],
     btnName="Say hello to my little friend",
     myEvent= () => {
       setIsClicked(isClicked = true);
     },
-    changeImageNext = () => {
-      console.log("CLICKED NEXT");
-      goNext(isFirst =+ 1)
-    },
+
     changeImagePrev = () => {
-      console.log("CLICKED PREV");
-      goNext(isFirst -1)
+      let beginningArr = isFirst !== 0 ? goNext(isFirst -1) : null;
+      return beginningArr;
+    },
+
+    changeImageNext = () => {
+        console.log("CLICKED NEXT");
+        goNext(isFirst + 1)
     }
+
   } = props
 
   let [isClicked, setIsClicked ] = useState(false);
