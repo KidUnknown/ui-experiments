@@ -11,6 +11,7 @@ import './App.css';
 function App({ ...props }) {
   
   const {
+
     title="Messing with React",
     imageUrl = [
       "https://wallpaperaccess.com/full/187163.jpg",
@@ -18,18 +19,29 @@ function App({ ...props }) {
       "https://webneel.com/wallpaper/sites/default/files/images/08-2018/3-nature-wallpaper-mountain.jpg"
     ],
     btnName="Say hello to my little friend",
+
     myEvent= () => {
       setIsClicked(isClicked = true);
     },
 
+    uiConfig = [
+      {
+        show: true
+      }
+    ],
+    
     changeImagePrev = () => {
-      let beginningArr = isFirst !== 0 ? goNext(isFirst -1) : null;
-      return beginningArr;
+      console.log("Clicked Prev");
+      const start = isFirst  !== 0  ? goNext(isFirst - 1) : null;
+      console.log(isFirst);
+      return start;
     },
 
-    changeImageNext = () => {
-        console.log("CLICKED NEXT");
-        goNext(isFirst + 1)
+    changeImageNext = () => {   
+      console.log("Clicked Next");
+      const end = isFirst < imageUrl.length -1  ? goNext(isFirst + 1) : null;
+      console.log(isFirst);
+      return end;
     }
 
   } = props
@@ -37,15 +49,19 @@ function App({ ...props }) {
   let [isClicked, setIsClicked ] = useState(false);
   let [isFirst, goNext] = useState(0);
 
+  console.log(isFirst);
+
   return (
     <div className="App">
         <Layout>
           <Banner image={`${imageUrl[isFirst]}`} title={ title }>
             <Button text={ isClicked ? "clicked" : btnName } click={ myEvent } />
             <Controls 
+              config = { uiConfig }
               controlA = { changeImageNext }
               controlB = { changeImagePrev }
             />
+          <span>{`${isFirst + 1 } of ${ imageUrl.length }`}</span>
           </Banner>
         </Layout>
     </div>
